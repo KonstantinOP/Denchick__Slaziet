@@ -23,34 +23,30 @@ import androidx.core.view.KeyEventDispatcher.Component
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class SecActivity : ComponentActivity() {
+class SecondActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
+        setContent{
             SecondScreen()
         }
     }
-
    @Composable
    fun SecondScreen() {
        Column(modifier = Modifier
            .padding(top = 120.dp)
            .fillMaxWidth(),
-           horizontalAlignment = Alignment.CenterHorizontally) {
-           Text("this second activity", fontSize = 30.sp)
+           horizontalAlignment = Alignment.CenterHorizontally){
+           Text("this second activity",
+               fontSize = 30.sp)
            Spacer(modifier = Modifier. height(160.dp))
-           Button(onClick = {finish()}) { Text("back to firrst activity", fontSize = 30.sp) }
+           Button(onClick = {finish()}){
+               Text("back to firrst activity",
+                   fontSize = 30.sp)}
        }
-
-
-
-
     }
     @Preview(showBackground = true, showSystemUi = true)
     @Composable
-    fun FirstScreenPreview() {
+    fun FirstScreenPreview(){
         SecondScreen()
     }
-
-
 }

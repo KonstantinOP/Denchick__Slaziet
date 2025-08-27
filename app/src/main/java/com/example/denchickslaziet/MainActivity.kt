@@ -40,17 +40,20 @@ class MainActivity: ComponentActivity() {
              .padding(top = 180.dp)
              .fillMaxWidth(),
              horizontalAlignment = Alignment.CenterHorizontally)
-         { Text("this first activity", fontSize = 20.sp)
-             Spacer(modifier = Modifier.height(160.dp))
+         { Text("this first activity",
+             fontSize = 20.sp)
+             Spacer(modifier = Modifier
+                 .height(160.dp))
 
-         Button(onClick = { val intent = Intent(this@MainActivity, SecActivity::class.java)
+         Button(onClick = { val intent = Intent(this@MainActivity, SecondActivity::class.java)
              startActivity(intent) })
-          { Text("next to activity", fontSize = 20.sp) }
+          { Text("next to activity",
+              fontSize = 20.sp) }
          }
     }
     @Preview(showBackground = true, showSystemUi = true)
     @Composable
-    fun FirstScreenPreview() {
+    fun FirstScreenPreview(){
         FirstScreen()
     }
 }
