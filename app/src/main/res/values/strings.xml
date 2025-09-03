@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Denchick Slaziet</string>
+    <string name="button_text">Нажми на меня</string>
+    <string name="dialog_title">У меня к тебе вопрос)))</string>
+    <string name="dialog_message">Сосал?)))</string>
+    <string name="dialog_confirm">Да</string>
+    <string name="dialog_clouse">Закрыть</string>
 </resources>

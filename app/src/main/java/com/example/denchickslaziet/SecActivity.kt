@@ -33,6 +33,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.motionEventSpy
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,58 +45,66 @@ import androidx.core.view.WindowInsetsCompat
 class SecondActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             SecondScreen()
             Column {
-                ShowDialogExample()
-            }
-
-        }
-    }
-    @Preview(showBackground = true, showSystemUi = true)
-    @Composable
-    fun ShowDialogExample(){
-     var showDialog by remember { mutableStateOf(false)}
-        Column(modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = {showDialog = true},
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Red
-                )){
-                Text("Нажми на меня")
-
-            }
-            if (showDialog){
-                AlertDialog(
-                    onDismissRequest = {showDialog = false},
-                    title = {
-                        Row(
-                            modifier = Modifier,
-                           horizontalArrangement = Arrangement.Absolute.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically,) {
-                            Text("У меня к тебе вопрос))", fontSize = 20.sp)
-                            Icon(
-                                imageVector = Icons.Default.Close,
-                                contentDescription = "Закрыть",
-                                modifier = Modifier
-                                    .size(20.dp)
-                                    .clickable { showDialog = false }
-
-                            )
-                        }
-                    },
-                    text = {
-                        Text("Сосал?)))") },
-                    confirmButton = {
-                        Button(onClick = {showDialog = false}) {
-                            Text("Да")
-                        }
-                    }
-                )
+                ShowDialogScreen()
             }
         }
     }
+        @Composable
+        fun ShowDialogScreen() {
+            var showDialog by remember { mutableStateOf(false) }
+            ShowDialogContent(
+                showDialog = showDialog,
+                onDialogChange = { showDialog = it })
+        }
+        @Composable
+        fun ShowDialogContent(showDialog: Boolean, onDialogChange: (Boolean) -> Unit) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Button(
+                    onClick = { onDialogChange(true) },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+                ) {
+                    Text(stringResource(R.string.button_text))
+                }
+                if (showDialog){
+                    AlertDialog(
+                        onDismissRequest = { onDialogChange(false)},
+                        title = {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(stringResource(R.string.dialog_title), fontSize = 20.sp)
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = stringResource(R.string.dialog_clouse),
+                                    modifier = Modifier
+                                        .size(20.dp)
+                                        .clickable { onDialogChange(false)}
+                                )
+                            }
+                        },
+                        text = {
+                            Text(stringResource(R.string.dialog_message))
+                        },
+                        confirmButton = {
+                            Button(onClick = { onDialogChange(false) }){
+                                Text(stringResource(R.string.dialog_confirm))
+                            }
+                        }
+                    )
+                }
+            }
+        }
     @Composable
     fun SecondScreen() {
         Column(
@@ -116,15 +126,14 @@ class SecondActivity : ComponentActivity() {
             }
         }
     }
-
     @Preview(showBackground = true, showSystemUi = true)
     @Composable
-    fun FirstScreenPreview() {
+    fun FirstScreenPreview(){
         SecondScreen()
     }
-}
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun ShoowDialogExamplePreview() {
-
+    @Preview(showBackground = true, showSystemUi = true)
+    @Composable
+    fun ShowDialogExamplePreview(){
+        ShowDialogScreen()
+    }
 }
