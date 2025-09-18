@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,27 +27,36 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.savedstate.SavedState
 import com.example.denchickslaziet.ui.theme.DenchickSlazietTheme
-
-class MainActivity: ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+import kotlinx.coroutines.selects.SelectInstance
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        setContent {
+        setContentView(R.layout.activity_main)
+        findViewById<ComposeView>(R.id.compose_view).setContent {
             FirstScreen()
+        }
+        if (savedInstanceState == null){
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container,
+                    FIrstFragment())
+                .commit()
         }
     }
      @Composable
      fun FirstScreen(){
          Column(modifier = Modifier
-             .padding(top = 180.dp)
+             .padding(top = 100.dp)
              .fillMaxWidth(),
              horizontalAlignment = Alignment.CenterHorizontally)
          { Text("this first activity",
              fontSize = 20.sp)
              Spacer(modifier = Modifier
                  .height(160.dp))
-
-         Button(onClick = { val intent = Intent(this@MainActivity, SecondActivity::class.java)
+         Button(onClick = {
+             val intent = Intent(this@MainActivity,
+             SecondActivity::class.java)
              startActivity(intent) })
           { Text("next to activity",
               fontSize = 20.sp) }
