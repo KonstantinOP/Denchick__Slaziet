@@ -1,4 +1,4 @@
-package com.example.denchickslaziet
+package com.example.denchickslaziet.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+
 class SecondFragment : Fragment(){
     companion object{
         private const val ARG_NUMBER = "agr_number"

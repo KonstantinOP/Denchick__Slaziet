@@ -1,5 +1,4 @@
-package com.example.denchickslaziet
-
+package com.example.denchickslaziet.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
