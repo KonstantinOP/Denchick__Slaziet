@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import com.example.denchickslaziet.ui.screens.SecondScreen
 import com.example.denchickslaziet.ui.screens.ShowDialogScreen
 
-
 class SecondActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

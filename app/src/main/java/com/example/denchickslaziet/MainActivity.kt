@@ -1,25 +1,23 @@
 package com.example.denchickslaziet
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.platform.ComposeView
-import com.example.denchickslaziet.ui.fragments.FIrstFragment
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material3.MaterialTheme
 import com.example.denchickslaziet.ui.screens.FirstScreen
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        findViewById<ComposeView>(R.id.compose_view).setContent {
-            FirstScreen(activity = this)
-        }
-
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, FIrstFragment())
-                .commit()
+        setContent {
+            MaterialTheme {
+                FirstScreen(
+                    onNavigateToSecond = {
+                        startActivity(Intent(this, SecondActivity::class.java))
+                    }
+                )
+            }
         }
     }
 }

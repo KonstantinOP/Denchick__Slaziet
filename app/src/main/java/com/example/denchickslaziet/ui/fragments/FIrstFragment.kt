@@ -13,9 +13,7 @@ import com.example.denchickslaziet.ui.screens.InputScreen
 import com.example.denchickslaziet.viewmodel.InputViewModel
 
 class FIrstFragment : Fragment() {
-
     private val viewModel: InputViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
